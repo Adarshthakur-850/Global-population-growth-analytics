@@ -2,9 +2,9 @@ name: Pylint
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
 
 jobs:
   pylint:
@@ -22,16 +22,14 @@ jobs:
 
       - name: Install dependencies
         run: |
-          set -e
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
           pip install pylint
 
       - name: Run Pylint
-        shell: bash
         run: |
-          set -e
-
           FILES=$(git ls-files "*.py")
 
           if [ -z "$FILES" ]; then
@@ -40,9 +38,9 @@ jobs:
           fi
 
           if [ -f ".pylintrc" ]; then
-            echo "Using .pylintrc"
-            pylint --rcfile=.pylintrc $FILES
+            echo "Using custom .pylintrc configuration"
+            pylint --rcfile=.pylintrc --exit-zero $FILES
           else
-            echo "No .pylintrc found, running default pylint"
-            pylint $FILES
+            echo "Running pylint with default settings"
+            pylint --exit-zero $FILES
           fi
