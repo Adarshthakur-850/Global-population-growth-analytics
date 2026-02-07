@@ -1,8 +1,3 @@
-Here’s a **professional, clear, and complete `README.md`** tailored to your *Global Population Growth Analytics* repository. It’s written to suit a data analytics project and make the repository easy to understand and use.
-
----
-
-```markdown
 # 🌍 Global Population Growth Analytics
 
 A data analysis and visualization project focused on exploring global population trends, growth patterns, and insights across countries and years.
