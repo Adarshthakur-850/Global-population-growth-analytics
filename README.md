@@ -153,13 +153,3 @@ This repository is open-source and available under the **MIT License**.
 ## 🙌 Contributions
 
 Contributions and enhancements are welcome! Feel free to raise issues or submit pull requests.
-
-```
-
----
-
-If you want, I can also generate a polished **requirements.txt** file or a **project presentation summary** for this repository.
-::contentReference[oaicite:2]{index=2}
-```
-
-[1]: https://ourworldindata.org/population-growth?utm_source=chatgpt.com "Population Growth"
