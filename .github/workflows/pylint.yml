@@ -22,19 +22,24 @@ jobs:
 
       - name: Install dependencies
         run: |
+          set -e
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install pylint
 
       - name: Run Pylint
+        shell: bash
         run: |
-          FILES=$(git ls-files '*.py')
+          set -e
+
+          FILES=$(git ls-files "*.py")
+
           if [ -z "$FILES" ]; then
             echo "No Python files found."
             exit 0
           fi
 
-          if [ -f .pylintrc ]; then
+          if [ -f ".pylintrc" ]; then
             echo "Using .pylintrc"
             pylint --rcfile=.pylintrc $FILES
           else
