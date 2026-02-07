@@ -10,10 +10,6 @@ jobs:
   pylint:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        python-version: ["3.10"]
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -21,7 +17,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.10"
           cache: "pip"
 
       - name: Install dependencies
@@ -30,11 +26,18 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install pylint
 
-      - name: Run Pylint with project config
+      - name: Run Pylint
         run: |
           FILES=$(git ls-files '*.py')
           if [ -z "$FILES" ]; then
             echo "No Python files found."
             exit 0
           fi
-          pylint --rcfile=.pylintrc $FILES
+
+          if [ -f .pylintrc ]; then
+            echo "Using .pylintrc"
+            pylint --rcfile=.pylintrc $FILES
+          else
+            echo "No .pylintrc found, running default pylint"
+            pylint $FILES
+          fi
